@@ -11,6 +11,7 @@ import com.task5.api.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +35,10 @@ public class ChatServiceImpl implements ChatService {
         chat.setSubject(request.getSubject());
         assert receiver != null;
         assert sender != null;
-        chat.setUsers(List.of(receiver, sender));
+        List<User> users = new ArrayList<>();
+        users.add(receiver);
+        users.add(sender);
+        chat.setUsers(users);
         Chat createdChat = chatRepository.save(chat);
 
         Message message = new Message();
