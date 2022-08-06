@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MappingUtils {
@@ -24,7 +25,7 @@ public class MappingUtils {
             dto.setName(user.getName());
 
             User sender = userRepository.findById(senderID).orElse(null);
-            List<Chat> chats = user.getChats().stream().filter(chat -> chat.getUsers().contains(sender)).toList();
+            List<Chat> chats = user.getChats().stream().filter(chat -> chat.getUsers().contains(sender)).collect(Collectors.toList());
 
             dto.setChats(chats);
             dtoList.add(dto);
